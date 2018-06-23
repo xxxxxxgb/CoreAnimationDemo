@@ -1,0 +1,3 @@
+[submodule "CoreAnimationDemo/Vendors/TBActionSheet"]
+	path = CoreAnimationDemo/Vendors/TBActionSheet
+	url = https://github.com/yulingtianxia/TBActionSheet.git
