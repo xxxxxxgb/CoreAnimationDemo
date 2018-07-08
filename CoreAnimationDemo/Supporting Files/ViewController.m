@@ -10,6 +10,8 @@
 
 #import "BaseViewController.h"
 #import "Section2ViewController.h"
+#import "Section3ViewController.h"
+#import "Section4ViewController.h"
 
 @interface ViewController ()
 @property NSMutableArray<BaseViewController *> *viewControllerArray;
@@ -23,6 +25,8 @@
     self.viewControllerArray = [NSMutableArray new];
     
     [self.viewControllerArray addObject:[Section2ViewController viewControllerWithTitle:@"寄宿图"]];
+    [self.viewControllerArray addObject:[Section3ViewController viewControllerWithTitle:@"图层几何学"]];
+    [self.viewControllerArray addObject:[Section4ViewController viewControllerWithTitle:@"视觉效果"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,7 +57,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return 60;
 }
 
 #pragma mark - UITableViewDelegate

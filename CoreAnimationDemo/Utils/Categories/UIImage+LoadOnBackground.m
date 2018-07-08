@@ -12,16 +12,16 @@
 @implementation UIImage (LoadOnBackground)
 
 + (void)loadImageOnBackgroundOfFile:(NSString *)path
-                          completed:(LoadImageCompletionBlock)completedBlock {
-    [self loadImageOnBackgroundOfFile:path shouldDecompress:YES completed:completedBlock];
+                     completedBlock:(LoadImageCompletionBlock)completedBlock {
+    [self loadImageOnBackgroundOfFile:path shouldDecompress:YES completedBlock:completedBlock];
 }
 
 + (void)loadImageOnBackgroundOfFile:(NSString *)path
                    shouldDecompress:(BOOL)shouldDecompress
-                          completed:(LoadImageCompletionBlock)completedBlock {
+                     completedBlock:(LoadImageCompletionBlock)completedBlock {
     
     if (path == nil || completedBlock == nil) {
-        NSLog(@"[UIImage+loadImageOnBackgroundOfFile:shouldDecompress:completed:]方法的path和completedBlock参数不能为空");
+        NSLog(@"[UIImage+loadImageOnBackgroundOfFile:shouldDecompress:completedBlock:]方法的path和completedBlock参数不能为空");
         return;
     }
     
@@ -34,7 +34,6 @@
             if (imageRef) {
                 CGColorSpaceRef colorSpaceRef = CGImageGetColorSpace(imageRef);
                 CGColorSpaceModel colorSpaceModel = CGColorSpaceGetModel(colorSpaceRef);
-                CGColorSpaceRelease(colorSpaceRef);
                 
                 if (colorSpaceModel == kCGColorSpaceModelCMYK) {
                     CGImageRelease(imageRef);
