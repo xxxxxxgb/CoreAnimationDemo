@@ -8,13 +8,14 @@
 
 #import "ViewController.h"
 
-#import "BaseViewController.h"
+#import "UIViewController+Convenience.h"
 #import "Section2ViewController.h"
 #import "Section3ViewController.h"
 #import "Section4ViewController.h"
+#import "Section5ViewController.h"
 
 @interface ViewController ()
-@property NSMutableArray<BaseViewController *> *viewControllerArray;
+
 @end
 
 @implementation ViewController
@@ -22,47 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.viewControllerArray = [NSMutableArray new];
-    
-    [self.viewControllerArray addObject:[Section2ViewController viewControllerWithTitle:@"寄宿图"]];
-    [self.viewControllerArray addObject:[Section3ViewController viewControllerWithTitle:@"图层几何学"]];
-    [self.viewControllerArray addObject:[Section4ViewController viewControllerWithTitle:@"视觉效果"]];
+    [self.viewControllerArray addObject:[Section2ViewController viewControllerInitByXibWithTitle:@"寄宿图"]];
+    [self.viewControllerArray addObject:[Section3ViewController viewControllerInitByXibWithTitle:@"图层几何学"]];
+    [self.viewControllerArray addObject:[Section4ViewController viewControllerInitByXibWithTitle:@"视觉效果"]];
+    [self.viewControllerArray addObject:[Section5ViewController viewControllerWithTitle:@"变换"]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewControllerArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString  * const reuseIdentifier = @"reuseCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    cell.textLabel.text = self.viewControllerArray[indexPath.row].title;
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
-}
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:self.viewControllerArray[indexPath.row] animated:YES];
 }
 
 @end

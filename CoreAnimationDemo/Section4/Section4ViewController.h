@@ -6,8 +6,8 @@
 //  Copyright © 2018年 xgb. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface Section4ViewController : BaseViewController
+@interface Section4ViewController : UIViewController
 
 @end

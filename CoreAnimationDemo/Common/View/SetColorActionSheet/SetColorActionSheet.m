@@ -26,7 +26,7 @@
 
 - (instancetype)initWithCompletedBlock:(SetColorActionSheetBlock)completedBlock {
     if (completedBlock == nil) {
-        NSLog(@"[SetColorActionSheet-initWithCompletedBlock:]方法completedBlock参数不能为空");
+        NSLog(@"[SetColorActionSheet -initWithCompletedBlock:]方法completedBlock参数不能为空");
         return nil;
     }
     
@@ -44,10 +44,10 @@
         self.displayView = setColorView.subviews[4];
         self.customView = setColorView;
         
-        [self.redSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.greenSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.blueSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.alphaSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.redSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.greenSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.blueSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.alphaSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
         
         [self addButtonWithTitle:@"确定" style:TBActionButtonStyleDefault handler:^(TBActionButton * _Nonnull button) {
             if (weakSelf.completedBlock) {
@@ -61,22 +61,10 @@
 }
 
 - (void)show {
-    NSAssert(false, @"[SetColorActionSheet-show]方法弃用");
+    NSAssert(false, @"[SetColorActionSheet -show]方法弃用");
 }
 
 - (void)showWithColor:(UIColor *)color {
-    [self setColor:color];
-    NSLog(@"");
-    [super show];
-}
-
-#pragma mark - Private
-- (void)updateDisplay {
-    UIColor *color = [UIColor colorWithRed:self.redSlider.value green:self.greenSlider.value blue:self.blueSlider.value alpha:self.alphaSlider.value];
-    self.displayView.backgroundColor = color;
-}
-
-- (void)setColor:(UIColor *)color {
     if (color) {
         CGFloat r=0,g=0,b=0,a=0;
         if(![color getRed:&r green:&g blue:&b alpha:&a]) {
@@ -91,8 +79,15 @@
         self.blueSlider.value = b;
         self.alphaSlider.value = a;
         
-        [self updateDisplay];
+        [self _updateDisplay];
     }
+    [super show];
+}
+
+#pragma mark - Private
+- (void)_updateDisplay {
+    UIColor *color = [UIColor colorWithRed:self.redSlider.value green:self.greenSlider.value blue:self.blueSlider.value alpha:self.alphaSlider.value];
+    self.displayView.backgroundColor = color;
 }
 
 @end

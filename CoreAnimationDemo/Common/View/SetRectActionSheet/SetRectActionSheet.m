@@ -37,7 +37,7 @@
                  completedBlock:(SetRectActionSheetBlock)completedBlock {
     
     if (completedBlock == nil) {
-        NSLog(@"-initWithCurrentRect:maxRect:completedBlock:方法completedBlock参数不能为空");
+        NSLog(@"[SetRectActionSheet -initWithMaxRect:completedBlock:]方法completedBlock参数不能为空");
         return nil;
     }
     
@@ -55,10 +55,10 @@
         self.displayLabel = setRectView.subviews[4];
         self.customView = setRectView;
         
-        [self.xSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.ySlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.widthSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
-        [self.heightSlider addTarget:self action:@selector(updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.xSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.ySlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.widthSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
+        [self.heightSlider addTarget:self action:@selector(_updateDisplay) forControlEvents:UIControlEventValueChanged];
     
 
         self.xSlider.maximumValue = maxRect.origin.x;
@@ -77,7 +77,7 @@
 }
 
 - (void)show {
-    NSAssert(false, @"[SetRectActionSheet-show]方法弃用");
+    NSAssert(false, @"[SetRectActionSheet -show]方法弃用");
 }
 
 - (void)showWithPoint:(CGPoint)point {
@@ -94,6 +94,7 @@
     self.ySlider.enabled = NO;
     self.widthSlider.value = size.width;
     self.heightSlider.value = size.height;
+    [self _updateDisplay];
     
     [super show];
 }
@@ -103,14 +104,15 @@
     self.ySlider.value = rect.origin.y;
     self.widthSlider.value = rect.size.width;
     self.heightSlider.value = rect.size.height;
+    [self _updateDisplay];
     
     [super show];
 }
 
 #pragma mark - Private
-- (void)updateDisplay {
-    NSString *curRectString = [NSString stringWithFormat:@"{%.2f, %.2f, %.2f, %.2f}", self.xSlider.value, self.ySlider.value, self.widthSlider.value, self.heightSlider.value];
-    self.displayLabel.text = curRectString;
+- (void)_updateDisplay {
+    NSString *description = [NSString stringWithFormat:@"{%.2f, %.2f, %.2f, %.2f}", self.xSlider.value, self.ySlider.value, self.widthSlider.value, self.heightSlider.value];
+    self.displayLabel.text = description;
 }
 
 @end

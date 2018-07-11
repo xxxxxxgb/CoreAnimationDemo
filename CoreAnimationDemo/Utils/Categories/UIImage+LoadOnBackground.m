@@ -21,7 +21,7 @@
                      completedBlock:(LoadImageCompletionBlock)completedBlock {
     
     if (path == nil || completedBlock == nil) {
-        NSLog(@"[UIImage+loadImageOnBackgroundOfFile:shouldDecompress:completedBlock:]方法的path和completedBlock参数不能为空");
+        NSLog(@"[UIImage +loadImageOnBackgroundOfFile:shouldDecompress:completedBlock:]方法的path和completedBlock参数不能为空");
         return;
     }
     
